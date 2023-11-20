@@ -1,0 +1,68 @@
+(defwidget bar []
+    (box :class "eww_bar" 
+         :orientation "v" 
+         :vexpand "false" 
+         :hexpand "false"
+    (workspaces)
+    (time&battery)
+))
+
+;; Workspaces ;;
+(defwidget workspaces []
+  (box :orientation "v"
+       :space-evenly false
+       :halign "start"
+       :spacing 2
+    (box :class "works" :orientation "v" :spacing 8 :space-evenly true
+        (button :class "works-button" :onclick "wmctrl -s 0" "")
+        (button :class "works-button actual-tag" :onclick "wmctrl -s 1" "")
+        (button :class "works-button" :onclick "wmctrl -s 2" "")
+        (button :class "works-button" :onclick "wmctrl -s 3" "")
+        (button :class "works-button" :onclick "wmctrl -s 4" "")
+        (button :class "works-button" :onclick "wmctrl -s 5" "")
+        (button :class "works-button" :onclick "wmctrl -s 6" "")
+        (button :class "works-button" :onclick "wmctrl -s 7" "")
+        (button :class "works-button" :onclick "wmctrl -s 8" "")
+    )))
+
+
+(defpoll bat-level   :interval "1s"  "cat /sys/class/power_supply/BAT1/capacity")
+
+
+(defpoll hour   :interval "1s"  "date '+%H'")
+(defpoll min    :interval "1s"  "date '+%M'")
+
+;; Clock Widgets & Battery Widget ;;
+(defwidget time&battery []
+    (box :valign "end"
+         :orientation "v" 
+
+        (box    :class "battery" 
+        (button :onclick "eww open battery_control --toggle"   
+                :class "bat" bat-level)
+        )
+
+        (box    :orientation "v" 
+                :class "time" 
+        (button :onclick ""   
+                :class "time-hour" hour)
+        (button :onclick ""   
+                :class "time-min"  min)
+        ))
+)
+
+
+;; Dock ;;
+(defwindow dock
+        :monitor 0
+        :geometry (geometry :x "0.5%"
+            :y "1%"
+            :width "50px"
+            :height "98%"
+            :anchor "top left")
+        :stacking "fg"
+        :reserve (struts :distance "60px" :side "left")
+        :windowtype "dock"
+        :wm-ignore false
+    (bar)
+)

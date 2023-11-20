@@ -1,0 +1,50 @@
+(defwidget control []
+    (box :class "eww_bar" 
+         :orientation "v" 
+         :vexpand "false" 
+         :hexpand "false"
+    (status)
+    (limiter)
+))
+
+(defpoll bat-status  :interval "1s"  "cat /sys/class/power_supply/BAT1/status")
+
+(defwidget status []
+    (box :orientation "h"
+         :space-evenly "false"
+         :class "battery-status"
+         :valign "start"
+        (label :halign "start" :text "Status: " :class "status-text")
+        (button :class "status-subtext" bat-status)
+    )
+)
+
+(defpoll bat-charge-limit  :interval "1s"  "cat /sys/class/power_supply/BAT1/charge_control_end_threshold")
+
+(defwidget limiter []
+    (box :orientation "v"
+         :space-evenly "false"
+         :class "battery-limiter"
+         :valign "start"
+         (box :orientation "h"
+            (label :halign "start" :text "Charging limiter: " :class "status-text")
+            (button :class "limiter-subtext" bat-charge-limit)
+         )
+        
+        (scale :min "50" :max "90" :value bat-charge-limit :class "limiter-bar" :onchange "{} > /sys/class/power_supply/BAT1/charge_control_end_threshold")
+    )
+)
+
+(defwindow battery_control
+           :monitor 0
+           :geometry (geometry :x "3%"
+                               :y "64%"
+                               :width "400px"
+                               :height "300px"
+                               :anchor "top left")
+           :stacking "fg"
+           :windowtype "toolbar"
+           :wm-ignore true
+           :class "battery_control"
+    (control)
+)

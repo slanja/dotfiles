@@ -1,0 +1,47 @@
+(defpoll current-brightness :interval "1s" "echo $((`cat /sys/class/backlight/intel_backlight/brightness`*100/120000))")
+
+(defwidget bri []
+    (box :orientation "h"
+         :space-evenly "false"
+         :class "bri-control"
+        (label :halign "start" :text "🔆" :class "icon")
+        (scale :value current-brightness :class "bribar")
+))
+
+
+
+;; Brightness Control ;;
+(defwindow brightness
+        :monitor 0
+        :geometry (geometry :y "1%"
+            :width "300px"
+            :height "30px"
+            :anchor "top center")
+        :stacking "fg"
+        :windowtype "toolbar"
+        :wm-ignore true
+    (bri)
+)
+
+(defpoll current-volume :interval "1s" "echo $((`cat /sys/class/backlight/intel_backlight/brightness`*100/120000))")
+
+(defwidget vol []
+    (box :orientation "h"
+         :space-evenly "false"
+         :class "vol-control"
+        (label :halign "start" :text "🔊" :class "icon")
+        (scale :value current-volume :class "volbar")
+))
+
+;; Volume Control ;;
+(defwindow volume
+        :monitor 0
+        :geometry (geometry :y "1%"
+            :width "300px"
+            :height "30px"
+            :anchor "top center")
+        :stacking "fg"
+        :windowtype "toolbar"
+        :wm-ignore true
+    (vol)
+)
