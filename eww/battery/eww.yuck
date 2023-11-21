@@ -31,7 +31,7 @@
             (button :class "limiter-subtext" bat-charge-limit)
          )
         
-        (scale :min "50" :max "90" :value bat-charge-limit :class "limiter-bar" :onchange "{} > /sys/class/power_supply/BAT1/charge_control_end_threshold")
+        (scale :min "50" :max "90" :value bat-charge-limit :class "limiter-bar" :onchange "echo {} > /sys/class/power_supply/BAT1/charge_control_end_threshold")
     )
 )
 
