@@ -42,7 +42,7 @@
                                :width "400px"
                                :height "300px"
                                :anchor "top left")
-           :stacking "fg"
+           :stacking "bg"
            :windowtype "toolbar"
            :wm-ignore true
            :class "battery_control"
