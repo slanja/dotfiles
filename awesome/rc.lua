@@ -345,13 +345,20 @@ globalkeys = gears.table.join(
 )
 
 clientkeys = gears.table.join(
-    awful.key({ modkey,           }, "f",
-        function (c)
-            c.fullscreen = not c.fullscreen
-            c:raise()
-        end,
+    -- fullscreen bind
+    awful.key({ modkey }, "f", function (c) 
+        -- fullscreen current window
+        c.fullscreen = not c.fullscreen 
+        c:raise()
+
+        -- no border radius when fullscreen
+        c.shape = function(cr, w, h)
+            gears.shape.rounded_rect(cr, w, h, 0)
+        end
+    end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({ modkey, "Shift"   }, "c",      function (c) c:kill()                         end,
+
+    awful.key({ modkey }, "c",      function (c) c:kill()                         end,
               {description = "close", group = "client"}),
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ,
               {description = "toggle floating", group = "client"}),
