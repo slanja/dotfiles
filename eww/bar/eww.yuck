@@ -4,7 +4,7 @@
          :vexpand "false" 
          :hexpand "false"
     (workspaces)
-    (time&battery)
+    (timebattery)
 ))
 
 ;; Workspaces ;;
@@ -33,7 +33,7 @@
 (defpoll min    :interval "1s"  "date '+%M'")
 
 ;; Clock Widgets & Battery Widget ;;
-(defwidget time&battery []
+(defwidget timebattery []
     (box :valign "end"
          :orientation "v" 
 
