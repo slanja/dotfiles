@@ -332,6 +332,7 @@ globalkeys = gears.table.join(
     awful.key({ modkey, "Shift"    },            "s",     function () awful.spawn.with_shell("flameshot launcher") end,
               {description = "run flameshot", group = "slanja binds"}),
 
+
         -- brightness
     awful.key({ }, "XF86MonBrightnessUp", function () awful.spawn.with_shell("brillo -q -A 1 -u 100000 && eww open brightness --duration 1s") end,
               {description = "Increase brightness", group = "brightness"}),
@@ -346,16 +347,12 @@ globalkeys = gears.table.join(
 
 clientkeys = gears.table.join(
     -- fullscreen bind
-    awful.key({ modkey }, "f", function (c) 
+    awful.key({ modkey }, "f",
+        function (c) 
         -- fullscreen current window
-        c.fullscreen = not c.fullscreen 
-        c:raise()
-
-        -- no border radius when fullscreen
-        c.shape = function(cr, w, h)
-            gears.shape.rounded_rect(cr, w, h, 0)
-        end
-    end,
+            c.fullscreen = not c.fullscreen 
+            c:raise()
+        end,
         {description = "toggle fullscreen", group = "client"}),
 
     awful.key({ modkey }, "c",      function (c) c:kill()                         end,
@@ -519,7 +516,7 @@ awful.rules.rules = {
     },
 
     { rule_any = {type = { "dock", "toolbar" }
-      }, properties = { border_width = false}
+      }, properties = { border_width = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -532,6 +529,9 @@ awful.rules.rules = {
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
 
+
+-- If window is floating, than it's on top (caused fullscreen not working)
+--[[
 client.connect_signal("property::floating", function(c)
     if c.floating then
         c.ontop = true
@@ -539,6 +539,10 @@ client.connect_signal("property::floating", function(c)
         c.ontop = false
     end
 end)
+
+]]
+
+
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
