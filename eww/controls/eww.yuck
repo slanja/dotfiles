@@ -23,7 +23,7 @@
     (bri)
 )
 
-(defpoll current-volume :interval "1s" "echo $((`cat /sys/class/backlight/intel_backlight/brightness`*100/120000))")
+(defpoll current-volume :interval "1s" "pactl get-sink-volume alsa_output.pci-0000_00_1f.3.analog-stereo")
 
 (defwidget vol []
     (box :orientation "h"

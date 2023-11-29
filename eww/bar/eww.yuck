@@ -38,7 +38,7 @@
          :orientation "v" 
 
         (box    :class "battery" 
-        (button :onclick "eww open battery_control --toggle"   
+        (button :onclick "eww --config ~/.config/eww/battery open battery_control --toggle"   
                 :class "bat" bat-level)
         )
 

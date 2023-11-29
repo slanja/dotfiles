@@ -1,9 +1,13 @@
+* {
+  all: unset;
+}
+
 .battery_control {
   background-color: #222222;
   border-radius: 16px;
   border-style: solid;
   border-color: #71935B;
-  border-width: 5px;
+  border-width: 12px;
 }
 
 .battery-status {

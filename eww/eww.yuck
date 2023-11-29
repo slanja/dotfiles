@@ -1,3 +1,0 @@
-(include "bar/eww.yuck")
-(include "battery/eww.yuck")
-(include "controls/eww.yuck")
