@@ -331,13 +331,22 @@ globalkeys = gears.table.join(
               {description = "run rofi", group = "slanja binds"}),
     awful.key({ modkey, "Shift"    },            "s",     function () awful.spawn.with_shell("flameshot launcher") end,
               {description = "run flameshot", group = "slanja binds"}),
+    awful.key({ modkey, "Shift"    },            "b",     function () awful.spawn.with_shell("eww --config ~/.config/eww/bar open dock --toggle") end,
+              {description = "open eww bar", group = "slanja binds"}),
 
-
-        -- brightness
-    awful.key({ }, "XF86MonBrightnessUp", function () awful.spawn.with_shell("brillo -q -A 1 -u 100000 && eww open brightness --duration 1s") end,
+    -- brightness
+    awful.key({ }, "XF86MonBrightnessUp", function () awful.spawn.with_shell("brillo -q -A 1 -u 100000 && eww --config ~/.config/eww/controls open brightness --duration 1s") end,
               {description = "Increase brightness", group = "brightness"}),
-    awful.key({ }, "XF86MonBrightnessDown", function () awful.spawn.with_shell("brillo -q -U 1 -u 100000 && eww open brightness --duration 1s") end,
-              {description = "Decrease brightness", group = "brightness"}),
+    awful.key({ }, "XF86MonBrightnessDown", function () awful.spawn.with_shell("brillo -q -U 1 -u 100000 && eww --config ~/.config/eww/controls open brightness --duration 1s") end,
+              {description = "Decrease brightness", group = "audio"}),
+
+    -- volume
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn.with_shell("pactl set-sink-volume `pactl get-default-sink` +5% && eww --config ~/.config/eww/controls open volume --duration 1s") end,
+              {description = "Increase volume", group = "brightness"}),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn.with_shell("pactl set-sink-volume `pactl get-default-sink` -5% && eww --config ~/.config/eww/controls open volume --duration 1s") end,
+              {description = "Decrease volume", group = "audio"}),
+    awful.key({ }, "XF86AudioMute", function () awful.spawn.with_shell("~/scripts/sound_mute.sh && eww --config ~/.config/eww/controls open volume --duration 1s") end,
+              {description = "Mute audio", group = "audio"}),
 
     
     -- Menubar
