@@ -333,6 +333,8 @@ globalkeys = gears.table.join(
               {description = "run flameshot", group = "slanja binds"}),
     awful.key({ modkey, "Shift"    },            "b",     function () awful.spawn.with_shell("eww --config ~/.config/eww/bar open dock --toggle") end,
               {description = "open eww bar", group = "slanja binds"}),
+    awful.key({ modkey },            "l",     function () awful.spawn.with_shell("~/scripts/keyboard_layout.sh") end,
+              {description = "switch keyboard layout", group = "slanja binds"}),
 
     -- brightness
     awful.key({ }, "XF86MonBrightnessUp", function () awful.spawn.with_shell("brillo -q -A 1 -u 100000 && eww --config ~/.config/eww/controls open brightness --duration 1s") end,
