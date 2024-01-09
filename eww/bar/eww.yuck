@@ -1,9 +1,12 @@
+(deflisten workspace "scripts/workspace")
+
 (defwidget bar []
     (box :class "eww_bar" 
          :orientation "v" 
          :vexpand "false" 
          :hexpand "false"
     (workspaces)
+    (text)
     (timebattery)
 ))
 
@@ -14,23 +17,26 @@
        :halign "start"
        :spacing 2
     (box :class "works" :orientation "v" :spacing 8 :space-evenly true
-        (button :class "works-button" :onclick "wmctrl -s 0" "")
-        (button :class "works-button actual-tag" :onclick "wmctrl -s 1" "")
-        (button :class "works-button" :onclick "wmctrl -s 2" "")
-        (button :class "works-button" :onclick "wmctrl -s 3" "")
-        (button :class "works-button" :onclick "wmctrl -s 4" "")
-        (button :class "works-button" :onclick "wmctrl -s 5" "")
-        (button :class "works-button" :onclick "wmctrl -s 6" "")
-        (button :class "works-button" :onclick "wmctrl -s 7" "")
-        (button :class "works-button" :onclick "wmctrl -s 8" "")
+        
     )))
+
+;; Text ;;
+(defwidget text []
+    (box :orientation "v"
+        (label :text "Jan Slaný"
+               :angle 90
+               :class "text"
+        )
+    )
+)
 
 
 (defpoll bat-level   :interval "1s"  "cat /sys/class/power_supply/BAT1/capacity")
+(defpoll date   :interval "1s"  "date")
 
 
-(defpoll hour   :interval "1s"  "date '+%H'")
-(defpoll min    :interval "1s"  "date '+%M'")
+(defpoll hour   :interval "0s"  "date '+%H'")
+(defpoll min    :interval "0s"  "date '+%M'")
 
 ;; Clock Widgets & Battery Widget ;;
 (defwidget timebattery []
@@ -38,17 +44,22 @@
          :orientation "v" 
 
         (box    :class "battery" 
-        (button :onclick "eww --config ~/.config/eww/battery open battery_control --toggle"   
-                :class "bat" bat-level)
+                :tooltip bat-level
+            (button :onclick "eww --config ~/.config/eww/battery open-many battery_control --toggle"   
+                    :class "bat"
+                    "ϟ"
+                )
         )
 
         (box    :orientation "v" 
-                :class "time" 
-        (button :onclick ""   
-                :class "time-hour" hour)
-        (button :onclick ""   
-                :class "time-min"  min)
-        ))
+                :class "time"
+                :tooltip date
+            (button :onclick ""   
+                    :class "time-hour" hour)
+            (button :onclick ""   
+                    :class "time-min"  min)
+        )
+    )
 )
 
 
