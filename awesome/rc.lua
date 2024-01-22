@@ -14,6 +14,10 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
+
+-- multimonitor setup
+local xrandr = require("xrandr")
+
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
@@ -353,10 +357,14 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioMute", function () awful.spawn.with_shell("~/scripts/sound_mute.sh && eww --config ~/.config/eww/controls open volume --duration 1s") end,
               {description = "Mute audio", group = "audio"}),
 
+    awful.key({ modkey }, "p", function() xrandr.xrandr() end)
+
     
     -- Menubar
+    --[[
     awful.key({ modkey }, "p", function() menubar.show() end,
             {description = "show the menubar", group = "launcher"})
+    ]]
 )
 
 clientkeys = gears.table.join(
@@ -536,12 +544,24 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
     { rule = { class = "Firefox" },
        properties = { screen = 1, tag = "2" } },
+
+    
 }
 -- }}}
 
 -- {{{ Signals
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
+
+client.connect_signal("property::floating", function(c)
+    if not c.fullscreen then
+        if c.floating then
+            c.ontop = true
+        else
+            c.ontop = false
+        end
+    end
+end)
 
 
 -- If window is floating, than it's on top (caused fullscreen not working)
