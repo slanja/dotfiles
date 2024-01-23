@@ -27,7 +27,7 @@ theme.fg_minimize   = "#ffffff"
 theme.useless_gap   = dpi(4)
 theme.border_width  = dpi(4)
 theme.border_normal = "#222222"
-theme.border_focus  = "#c5575e"
+theme.border_focus  = "#e74c3c"
 theme.border_marked = "#c0c97d"
 
 -- There are other variable sets
@@ -98,7 +98,7 @@ theme.titlebar_floating_button_normal_active = themes_path.."titlebar/empty.png"
 theme.titlebar_floating_button_focus_active  = themes_path.."titlebar/minimize.png"
 
 
-theme.wallpaper = themes_path.."wallpapers/07.jpg"
+theme.wallpaper = "~/wallpapers/creekside.png"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."layouts/fairhw.png"
