@@ -553,6 +553,7 @@ awful.rules.rules = {
 -- Signal function to execute when a new client appears.
 client.connect_signal("manage", function (c)
 
+-- floating windows on top
 client.connect_signal("property::floating", function(c)
     if not c.fullscreen then
         if c.floating then
@@ -562,20 +563,6 @@ client.connect_signal("property::floating", function(c)
         end
     end
 end)
-
-
--- If window is floating, than it's on top (caused fullscreen not working)
---[[
-client.connect_signal("property::floating", function(c)
-    if c.floating then
-        c.ontop = true
-    else
-        c.ontop = false
-    end
-end)
-
-]]
-
 
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
@@ -605,17 +592,14 @@ client.connect_signal("request::titlebars", function(c)
 
     awful.titlebar(c, {size = 25, position = 'left'}) : setup {
         { -- Left
-            
-            --awful.titlebar.widget.stickybutton   (c),
-            --awful.titlebar.widget.ontopbutton    (c),R
-            --awful.titlebar.widget.minimizebutton  (c),
             awful.titlebar.widget.closebutton    (c),
             awful.titlebar.widget.floatingbutton (c),
             awful.titlebar.widget.maximizedbutton(c),
             layout = wibox.layout.flex.vertical()
         },
         --[[
-        { -- Middle
+        { 
+        -- Middle
             { -- Title
                 align  = "center",
                 widget = awful.titlebar.widget.titlewidget(c)
@@ -629,7 +613,7 @@ client.connect_signal("request::titlebars", function(c)
             buttons = buttons,
             layout  = wibox.layout.flex.vertical
         },
-        layout = wibox.layout.align.vertical
+        layout = wibox.layout.align.vertical()
     }
 end)
 
