@@ -66,13 +66,13 @@
 ;; Dock ;;
 (defwindow dock
         :monitor 0
-        :geometry (geometry :x "0.5%"
-            :y "0.9%"
-            :width "50px"
-            :height "98.4%"
+        :geometry (geometry :x "0%"
+            :y "0%"
+            :width "70px"
+            :height "100%"
             :anchor "top left")
         :stacking "fg"
-        :reserve (struts :distance "60px" :side "left")
+        :reserve (struts :distance "70px" :side "left")
         :windowtype "dock"
         :wm-ignore false
     (bar)
