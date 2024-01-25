@@ -6,8 +6,7 @@
          :vexpand "false" 
          :hexpand "false"
     (workspaces)
-    (text)
-    (timebattery)
+    (bottom)
 ))
 
 ;; Workspaces ;;
@@ -15,20 +14,22 @@
   (box :orientation "v"
        :space-evenly false
        :halign "start"
-       :spacing 2
-    (box :class "works" :orientation "v" :spacing 8 :space-evenly true
-        
-    )))
-
-;; Text ;;
-(defwidget text []
-    (box :orientation "v"
-        (label :text "Jan Slaný"
-               :angle 90
-               :class "text"
-        )
+       :spacing 10
+       :class "workspaces"
+        (button :onclick "wmctrl -s 0" "○")
+        (button :onclick "wmctrl -s 1" "○")
+        (button :onclick "wmctrl -s 2" "○")
+        (button :onclick "wmctrl -s 3" "○")
+        (button :onclick "wmctrl -s 4" "○")
+        (button :onclick "wmctrl -s 5" "○")
+        (button :onclick "wmctrl -s 6" "○")
+        (button :onclick "wmctrl -s 7" "○")
+        (button :onclick "wmctrl -s 8" "○")
     )
 )
+
+
+
 
 
 (defpoll bat-level   :interval "1s"  "cat /sys/class/power_supply/BAT1/capacity")
@@ -38,10 +39,12 @@
 (defpoll hour   :interval "0s"  "date '+%H'")
 (defpoll min    :interval "0s"  "date '+%M'")
 
-;; Clock Widgets & Battery Widget ;;
-(defwidget timebattery []
+
+;; battery, time and profile picture ;;
+(defwidget bottom []
     (box :valign "end"
          :orientation "v" 
+         :spacing 10
 
         (box    :class "battery" 
                 :tooltip bat-level
@@ -51,13 +54,22 @@
                 )
         )
 
-        (box    :orientation "v" 
-                :class "time"
+        (box    :class "time"
+                :orientation "v" 
                 :tooltip date
             (button :onclick ""   
                     :class "time-hour" hour)
             (button :onclick ""   
                     :class "time-min"  min)
+        )
+
+        (box    :class "profile-pic"
+            (button :onclick ""
+                (image  :path "/home/slanja/Pictures/profile.jpg"
+                        :image-width 50
+                        :image-height 50
+                )
+            )
         )
     )
 )
@@ -71,7 +83,7 @@
             :width "70px"
             :height "100%"
             :anchor "top left")
-        :stacking "fg"
+        :stacking "bg"
         :reserve (struts :distance "70px" :side "left")
         :windowtype "dock"
         :wm-ignore false
