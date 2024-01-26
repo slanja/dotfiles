@@ -5,6 +5,7 @@
          :orientation "v" 
          :vexpand "false" 
          :hexpand "false"
+         :stacking "bg"
     (workspaces)
     (bottom)
 ))
@@ -30,9 +31,8 @@
 
 
 
-
-
 (defpoll bat-level   :interval "1s"  "cat /sys/class/power_supply/BAT1/capacity")
+(defpoll bat   :interval "10s"  "/home/slanja/.config/eww/bar/scripts/battery.sh")
 (defpoll date   :interval "1s"  "date")
 
 
@@ -50,6 +50,7 @@
                 :tooltip bat-level
             (button :onclick "eww --config ~/.config/eww/battery open-many battery_control --toggle"   
                     :class "bat"
+                    :tooltip bat
                     "ϟ"
                 )
         )
@@ -65,9 +66,9 @@
 
         (box    :class "profile-pic"
             (button :onclick ""
-                (image  :path "/home/slanja/Pictures/profile.jpg"
-                        :image-width 50
-                        :image-height 50
+                (image  :path "/home/slanja/.config/eww/bar/profile.png"
+                        :image-width 45
+                        :image-height 45
                 )
             )
         )
@@ -83,7 +84,6 @@
             :width "70px"
             :height "100%"
             :anchor "top left")
-        :stacking "bg"
         :reserve (struts :distance "70px" :side "left")
         :windowtype "dock"
         :wm-ignore false
