@@ -543,9 +543,7 @@ awful.rules.rules = {
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     { rule = { class = "Firefox" },
-       properties = { screen = 1, tag = "2" } },
-
-    
+       properties = { screen = 1, tag = "2" } }, 
 }
 -- }}}
 
@@ -564,7 +562,28 @@ client.connect_signal("property::floating", function(c)
     end
 end)
 
---[[
+client.connect_signal("property::fullscreen", function(c)
+    if c.fullscreen then
+        c.shape = gears.shape.rectangle
+    else
+        c.shape = function(cr, w, h)
+            gears.shape.rounded_rect(cr, w, h, 15)
+        end
+    end
+end)
+
+client.connect_signal("property::maximized", function(c)
+    if c.maximized then
+        c.shape = gears.shape.rectangle
+    else
+        c.shape = function(cr, w, h)
+            gears.shape.rounded_rect(cr, w, h, 15)
+        end
+    end
+end)
+
+
+--[[[
 client.connect_signal("property::fullscreen", function(c)
     c.shape = gears.shape.rectangle
 end)
