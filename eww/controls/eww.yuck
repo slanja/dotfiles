@@ -1,4 +1,4 @@
-(defpoll current-brightness :interval "1s" "echo $((`cat /sys/class/backlight/intel_backlight/brightness`*100/120000))")
+(defpoll current-brightness :interval "0s" "echo $((`cat /sys/class/backlight/intel_backlight/brightness`*100/120000))")
 
 (defwidget bri []
     (box :orientation "h"
@@ -23,7 +23,7 @@
     (bri)
 )
 
-(defpoll current-volume :interval "1s" "pactl list sinks | grep 'Volume: front-left' | awk '{print $5}' | tr -d '%'")
+(defpoll current-volume :interval "0s" "pactl list sinks | grep 'Volume: front-left' | awk '{print $5}' | tr -d '%'")
 
 (defwidget vol []
     (box :orientation "h"
