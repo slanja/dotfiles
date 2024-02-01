@@ -333,7 +333,7 @@ globalkeys = gears.table.join(
     -- slanja binds
     awful.key({ modkey },            "r",     function () awful.spawn.with_shell("rofi -show drun") end,
               {description = "run rofi", group = "slanja binds"}),
-    awful.key({ modkey, "Shift"    },            "s",     function () awful.spawn.with_shell("flameshot launcher") end,
+    awful.key({ modkey, "Shift"    },            "s",     function () awful.spawn.with_shell("flameshot gui") end,
               {description = "run flameshot", group = "slanja binds"}),
     awful.key({ modkey, "Shift"    },            "b",     function () awful.spawn.with_shell("eww --config ~/.config/eww/bar open-many dock --toggle") end,
               {description = "open eww bar", group = "slanja binds"}),
