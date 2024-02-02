@@ -331,7 +331,7 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- slanja binds
-    awful.key({ modkey },            "r",     function () awful.spawn.with_shell("rofi -show drun") end,
+    awful.key({ modkey },            "r",     function () awful.spawn.with_shell("rofi -show drun -show-icons") end,
               {description = "run rofi", group = "slanja binds"}),
     awful.key({ modkey, "Shift"    },            "s",     function () awful.spawn.with_shell("flameshot gui") end,
               {description = "run flameshot", group = "slanja binds"}),
