@@ -1,4 +1,2 @@
-//@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"@theme "/usr/share/rofi/themes/windows11-list-dark.rasi"
-//@theme "/usr/share/rofi/themes/rounded-gray-dark.rasi"
-//@theme "/usr/share/rofi/themes/windows11-grid-dark.rasi"
+//@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
 @theme "/usr/share/rofi/themes/rounded-gray-dark.rasi"
