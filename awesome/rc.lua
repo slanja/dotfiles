@@ -496,7 +496,7 @@ awful.rules.rules = {
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
-     }
+        }  
     },
 
 
@@ -538,7 +538,7 @@ awful.rules.rules = {
     },
 
     { rule_any = {type = { "dock", "toolbar" }
-      }, properties = { border_width = false }
+      }, properties = { border_width = false, ontop = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -562,28 +562,7 @@ client.connect_signal("property::floating", function(c)
     end
 end)
 
-client.connect_signal("property::fullscreen", function(c)
-    if c.fullscreen then
-        c.shape = gears.shape.rectangle
-    else
-        c.shape = function(cr, w, h)
-            gears.shape.rounded_rect(cr, w, h, 15)
-        end
-    end
-end)
-
-client.connect_signal("property::maximized", function(c)
-    if c.maximized then
-        c.shape = gears.shape.rectangle
-    else
-        c.shape = function(cr, w, h)
-            gears.shape.rounded_rect(cr, w, h, 15)
-        end
-    end
-end)
-
-
---[[[
+--[[
 client.connect_signal("property::fullscreen", function(c)
     c.shape = gears.shape.rectangle
 end)
@@ -591,7 +570,7 @@ end)
 client.connect_signal("property::maximized", function(c)
     c.shape = gears.shape.rectangle
 end)
-]]--
+]]
 
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
