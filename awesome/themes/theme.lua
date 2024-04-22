@@ -25,7 +25,7 @@ theme.fg_urgent     = "#ff0000"
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = dpi(4)
-theme.border_width  = dpi(4)
+theme.border_width  = dpi(3)
 theme.border_normal = "#222222"
 theme.border_focus  = "#e74c3c"
 theme.border_marked = "#c0c97d"
@@ -98,7 +98,9 @@ theme.titlebar_floating_button_normal_active = themes_path.."titlebar/empty.png"
 theme.titlebar_floating_button_focus_active  = themes_path.."titlebar/minimize.png"
 
 
-theme.wallpaper = "~/wallpapers/creekside.png"
+theme.wallpaper = "~/wallpapers/rubberduck.jpg"
+-- creekside.png
+-- macArch.jpg
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."layouts/fairhw.png"
