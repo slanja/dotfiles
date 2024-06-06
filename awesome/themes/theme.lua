@@ -25,7 +25,7 @@ theme.fg_urgent     = "#ff0000"
 theme.fg_minimize   = "#ffffff"
 
 theme.useless_gap   = dpi(4)
-theme.border_width  = dpi(3)
+theme.border_width  = dpi(0)
 theme.border_normal = "#222222"
 theme.border_focus  = "#e74c3c"
 theme.border_marked = "#c0c97d"
@@ -71,13 +71,13 @@ theme.menu_width  = dpi(100)
 --theme.bg_widget = "#cc0000"
 
 -- Define the image to load
-theme.titlebar_close_button_normal = themes_path.."titlebar/empty.png"
+theme.titlebar_close_button_normal = themes_path.."titlebar/close_inactive.png"
 theme.titlebar_close_button_focus  = themes_path.."titlebar/close.png"
 
 theme.titlebar_minimize_button_normal = themes_path.."titlebar/empty.png"
 theme.titlebar_minimize_button_focus  = themes_path.."titlebar/minimize.png"
 
-theme.titlebar_maximized_button_normal_inactive = themes_path.."titlebar/empty.png"
+theme.titlebar_maximized_button_normal_inactive = themes_path.."titlebar/maximize_inactive.png"
 theme.titlebar_maximized_button_focus_inactive  = themes_path.."titlebar/maximize.png"
 theme.titlebar_maximized_button_normal_active = themes_path.."titlebar/empty.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."titlebar/maximize.png"
@@ -92,10 +92,10 @@ theme.titlebar_maximized_button_focus_active  = themes_path.."titlebar/maximize.
 --theme.titlebar_sticky_button_normal_active = themes_path.."default/titlebar/sticky_normal_active.png"
 --theme.titlebar_sticky_button_focus_active  = themes_path.."default/titlebar/sticky_focus_active.png"
 
-theme.titlebar_floating_button_normal_inactive = themes_path.."titlebar/empty.png"
-theme.titlebar_floating_button_focus_inactive  = themes_path.."titlebar/minimize.png"
+theme.titlebar_floating_button_normal_inactive = themes_path.."titlebar/floating_inactive.png"
+theme.titlebar_floating_button_focus_inactive  = themes_path.."titlebar/floating.png"
 theme.titlebar_floating_button_normal_active = themes_path.."titlebar/empty.png"
-theme.titlebar_floating_button_focus_active  = themes_path.."titlebar/minimize.png"
+theme.titlebar_floating_button_focus_active  = themes_path.."titlebar/floating.png"
 
 
 theme.wallpaper = "~/wallpapers/rubberduck.jpg"
