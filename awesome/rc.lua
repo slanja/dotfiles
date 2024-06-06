@@ -54,7 +54,7 @@ beautiful.init("/home/slanja/.config/awesome/themes/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "kitty"
-editor = os.getenv("EDITOR") or "nano"
+editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -124,7 +124,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock()
+mytextclock = wibox.widget.textclock('%H\n%M')
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -202,36 +202,38 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-        buttons = taglist_buttons
+        buttons = taglist_buttons,
+        layout = wibox.layout.fixed.vertical
     }
 
     -- Create a tasklist widget
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = tasklist_buttons
+        buttons = tasklist_buttons,
+        layout = wibox.layout.vertical
     }
 
     -- Create the wibox
-    s.mywibox = awful.wibar({ position = "top", screen = s })
-    s.mywibox.visible = not s.mywibox.visible
+    s.mywibox = awful.wibar({ position = "left", width = 70, screen = s })
+    s.mywibox.visible = s.mywibox.visible
 
     -- Add widgets to the wibox
     s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
+        layout = wibox.layout.align.vertical,
         { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
+            layout = wibox.layout.fixed.vertical,
             mylauncher,
             s.mytaglist,
             s.mypromptbox,
         },
-        s.mytasklist, -- Middle widget
+        not s.mytasklist, -- Middle widget
         { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-            mykeyboardlayout,
+            layout = wibox.layout.fixed.vertical,
+            -- mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
-            s.mylayoutbox,
+            -- s.mylayoutbox,
         },
     }
 end)
@@ -534,11 +536,11 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+        }, properties = { titlebars_enabled = true }
     },
 
     { rule_any = {type = { "dock", "toolbar" }
-      }, properties = { border_width = false, ontop = false }
+        }, properties = { border_width = false, ontop = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -566,11 +568,24 @@ end)
 client.connect_signal("property::fullscreen", function(c)
     c.shape = gears.shape.rectangle
 end)
+]]
+
+client.connect_signal("property::fullscreen", function(c)
+    if not c.fullscreen then
+        c.shape = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 13) end
+    else
+        c.shape = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 0) end
+    end
+end)
 
 client.connect_signal("property::maximized", function(c)
-    c.shape = gears.shape.rectangle
+    if not c.maximized then
+        c.shape = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 13) end
+    else
+        c.shape = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 0) end
+    end
 end)
-]]
+
 
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
@@ -598,38 +613,53 @@ client.connect_signal("request::titlebars", function(c)
         end)
     )
 
-    awful.titlebar(c, {size = 25, position = 'left'}) : setup {
-        { -- Left
-            awful.titlebar.widget.closebutton    (c),
-            awful.titlebar.widget.floatingbutton (c),
-            awful.titlebar.widget.maximizedbutton(c),
-            layout = wibox.layout.flex.vertical()
-        },
-        --[[
-        { 
-        -- Middle
-            { -- Title
-                align  = "center",
-                widget = awful.titlebar.widget.titlewidget(c)
+    local titlebar = awful.titlebar(c, {size = 40, position = 'left'}) 
+
+    titlebar:setup {
+        {
+            {
+                -- Left
+                awful.titlebar.widget.closebutton(c),
+                awful.titlebar.widget.maximizedbutton(c),
+                awful.titlebar.widget.floatingbutton(c),
+                spacing = 0,
+                layout = wibox.layout.fixed.vertical()
             },
-            buttons = buttons,
-            layout  = wibox.layout.flex.vertical
+            widget = wibox.container.margin,
+            top = 6,
+            bottom = 0,
+            right = 6,
+            left = 6
         },
-        ]]
-        { -- Right
-            --awful.titlebar.widget.iconwidget(c),
+        {
+            -- Middle
+            --     {
+            --     -- Title
+            --         align  = 'center',
+            --         widget = awful.titlebar.widget.titlewidget(c)
+            --     },
             buttons = buttons,
-            layout  = wibox.layout.flex.vertical
+            layout  = wibox.layout.flex.horizontal
         },
-        layout = wibox.layout.align.vertical()
+        {
+            -- Right
+            {
+                awful.titlebar.widget.stickybutton(c),
+                layout = wibox.layout.fixed.vertical()
+            },
+            widget = wibox.container.margin,
+            top = 0,
+            bottom = 0,
+            right = 6,
+            left = 3,
+        },
+        layout = wibox.layout.align.vertical
     }
 end)
 
 client.connect_signal("manage", function (c)
-    if c.type ~= "dock" then
-        c.shape = function(cr, w, h)
-            gears.shape.rounded_rect(cr, w, h, 15)
-        end
+    c.shape = function(cr, w, h)
+        gears.shape.rounded_rect(cr, w, h, 13)
     end
 end)
 
