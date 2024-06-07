@@ -113,7 +113,8 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                         })
 
 mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+                                     menu = mymainmenu
+                                    })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -124,7 +125,18 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 -- Create a textclock widget
-mytextclock = wibox.widget.textclock('%H\n%M')
+local clock_widget = wibox.widget {
+    {
+        {
+            align = "center",
+            valign = "center",
+            widget = wibox.widget.textclock('<span color="#ffffff" font="Motiva Sans 22" font-weight="bold">%H\n %M </span>', 5)
+        },
+        layout = wibox.layout.fixed.vertical
+    },
+    bg = "#2b2b2b",
+    widget = wibox.container.background,
+}
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -232,7 +244,7 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.vertical,
             -- mykeyboardlayout,
             wibox.widget.systray(),
-            mytextclock,
+            clock_widget,
             -- s.mylayoutbox,
         },
     }
@@ -570,19 +582,27 @@ client.connect_signal("property::fullscreen", function(c)
 end)
 ]]
 
+local rounded_rect = function(cr, w, h) 
+    gears.shape.rounded_rect(cr, w, h, 13) 
+end
+
+local sharp_rect = function(cr, w, h) 
+    gears.shape.rounded_rect(cr, w, h, 0) 
+end
+
 client.connect_signal("property::fullscreen", function(c)
     if not c.fullscreen then
-        c.shape = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 13) end
+        c.shape = rounded_rect
     else
-        c.shape = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 0) end
+        c.shape = sharp_rect
     end
 end)
 
 client.connect_signal("property::maximized", function(c)
     if not c.maximized then
-        c.shape = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 13) end
+        c.shape = rounded_rect
     else
-        c.shape = function(cr, w, h) gears.shape.rounded_rect(cr, w, h, 0) end
+        c.shape = sharp_rect
     end
 end)
 
