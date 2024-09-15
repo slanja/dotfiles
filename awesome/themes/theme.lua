@@ -79,7 +79,7 @@ theme.titlebar_minimize_button_focus  = themes_path.."titlebar/minimize.png"
 
 theme.titlebar_maximized_button_normal_inactive = themes_path.."titlebar/maximize_inactive.png"
 theme.titlebar_maximized_button_focus_inactive  = themes_path.."titlebar/maximize.png"
-theme.titlebar_maximized_button_normal_active = themes_path.."titlebar/empty.png"
+theme.titlebar_maximized_button_normal_active = themes_path.."titlebar/maximize_inactive.png"
 theme.titlebar_maximized_button_focus_active  = themes_path.."titlebar/maximize.png"
 
 --theme.titlebar_ontop_button_normal_inactive = themes_path.."default/titlebar/ontop_normal_inactive.png"
@@ -94,13 +94,14 @@ theme.titlebar_maximized_button_focus_active  = themes_path.."titlebar/maximize.
 
 theme.titlebar_floating_button_normal_inactive = themes_path.."titlebar/floating_inactive.png"
 theme.titlebar_floating_button_focus_inactive  = themes_path.."titlebar/floating.png"
-theme.titlebar_floating_button_normal_active = themes_path.."titlebar/empty.png"
+theme.titlebar_floating_button_normal_active = themes_path.."titlebar/floating_inactive.png"
 theme.titlebar_floating_button_focus_active  = themes_path.."titlebar/floating.png"
 
 
-theme.wallpaper = "~/wallpapers/rubberduck.jpg"
+theme.wallpaper = themes_path.."wallpapers/tofu.jpg"
 -- creekside.png
 -- macArch.jpg
+-- rubberduck.jpg
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = themes_path.."layouts/fairhw.png"
