@@ -1,4 +1,4 @@
-![arch linux awesome wm rice](showcase/rice.png)
+![arch linux awesome wm rice](showcase/rice_15092024.png)
 
 # Let's see how is my machine configured
 ![neofetch showcase](showcase/neofetch.png)
