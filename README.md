@@ -8,13 +8,14 @@
 - Terminal: kitty
 - Web browser: firefox
 - App launcher: rofi
-- Dock: eww
+- Dock: awesome wm widgets
 
-## Eww bar
+## Bar
 
-  - workspace indicator
+  - taglist
   - battery capacity indicator
-  - date and time
+  - clock
+  - workspace layout indicator
 
 | Battery levels  |           |
 |       ---       |    ---    |
